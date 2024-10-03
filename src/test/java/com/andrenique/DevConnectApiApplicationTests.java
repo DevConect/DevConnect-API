@@ -1,0 +1,13 @@
+package com.andrenique;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class DevConnectApiApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
