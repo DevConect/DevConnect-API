@@ -31,5 +31,8 @@ public class Hito {
     @OneToMany(mappedBy = "hito", cascade = CascadeType.ALL)
     private List<Tarea> tareas;
 
+    public void setFechaLimite(Object fechaLimite) {
+    }
+
     // Getters y setters
 }

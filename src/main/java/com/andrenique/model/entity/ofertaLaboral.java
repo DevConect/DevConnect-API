@@ -1,8 +1,10 @@
 package com.andrenique.model.entity;
-import java.util.List;
 
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Entity
@@ -22,8 +24,16 @@ public class ofertaLaboral {
 
     private double presupuesto;
 
-    @OneToMany(mappedBy = "ofertaLaboral", cascade = CascadeType.ALL)
-    private List<Proyecto> proyectos;
+    @ManyToOne // Cambiado a ManyToOne, ya que varias ofertas pueden pertenecer a un proyecto
+    @JoinColumn(name = "proyecto_id", nullable = false)
+    private Proyecto proyecto;
 
-    // Getters y setters
+    public void setFechaCreacion(LocalDate now) {
+    }
+
+    // No necesitas este método ya que se manejará a través del proyecto
+    // public void setProyecto(Proyecto proyecto) {
+    // }
+
+    // Getters y Setters generados por Lombok
 }

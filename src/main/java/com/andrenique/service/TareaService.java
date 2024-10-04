@@ -6,8 +6,9 @@ import com.andrenique.model.entity.Tarea;
 import com.andrenique.repository.HitoRepository;
 import com.andrenique.repository.TareaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class TareaService {
@@ -20,14 +21,14 @@ public class TareaService {
 
     public Tarea crearTarea(TareaDTO tareaDTO) {
         Hito hito = hitoRepository.findById(tareaDTO.getHitoId())
-                .orElseThrow(() -> new ConfigDataResourceNotFoundException("Hito no encontrado"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Hito no encontrado"));
 
         Tarea nuevaTarea = new Tarea();
         nuevaTarea.setTitulo(tareaDTO.getTitulo());
         nuevaTarea.setDescripcion(tareaDTO.getDescripcion());
         nuevaTarea.setFechaEntrega(tareaDTO.getFechaEntrega());
-        nuevaTarea.setEstado("Pendiente");
-        nuevaTarea.setHito(hito);
+        nuevaTarea.setEstado("Pendiente"); // O el estado que consideres adecuado
+        nuevaTarea.setHito(hito); // Asigna el hito a la tarea
 
         return tareaRepository.save(nuevaTarea);
     }
